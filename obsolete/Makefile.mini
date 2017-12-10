@@ -1,0 +1,28 @@
+#
+#  _           _   Makefile for jimp Virtual Machine
+#   | . |   | |_|   * 18/12/2001
+#  \  | | | | |   
+#
+
+TARGET=vm
+
+INCLUDE_PATH=./
+OBJS = vm.o class.o utils.o vmmemory.o arrays.o native.o thread.o locks.o queues.o gc.o
+
+CC=gcc
+CC_OPTIONS=-O2 -g2 -I$(INCLUDE_PATH) 
+
+
+# linker
+LINK=ld
+LINK_OPTIONS=-Map jimpVM.map --cref
+
+all : $(TARGET)
+
+$(TARGET): $(OBJS)
+	$(CC) -g2 $(CC_OPTIONS) $(OBJS) -o $(TARGET)
+
+clean::
+	@rm *.o
+	@rm $(TARGET)
+	
